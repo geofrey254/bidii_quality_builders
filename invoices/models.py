@@ -1,5 +1,7 @@
 from django.db import models
 from jobs.models import Job
+from datetime import timedelta
+from django.utils.timezone import now
 
 
 class Invoice(models.Model):
@@ -9,5 +11,10 @@ class Invoice(models.Model):
     due_date = models.DateField()
     paid = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        if not self.due_date:
+            self.due_date = now().date() + timedelta(days=30)
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"Invoice for Job {self.job.id} - Paid: {self.paid}"
+        return f"Invoice for {self.job}"
