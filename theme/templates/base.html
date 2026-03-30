@@ -1,0 +1,161 @@
+{% load static tailwind_tags %}
+{% comment %} Global base template for the application {% endcomment %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Bidii Quality Builders{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% tailwind_css %}
+
+</head>
+
+<body class="bg-purple-50 bg-grid min-h-screen flex flex-col text-purple-950">
+
+    <!-- Mobile overlay -->
+    <div id="menu-overlay" class="fixed inset-0 bg-purple-950/60 backdrop-blur-sm z-40 md:hidden"></div>
+
+    <!-- HEADER -->
+    <header
+        class="sticky top-0 z-50 bg-purple-950 border-b border-purple-800/40 shadow-[0_4px_32px_rgba(59,7,100,0.4)] nav-accent">
+        <nav class="max-w-6xl mx-auto h-18 px-5 md:px-8 flex items-center justify-between gap-6">
+
+            <!-- Brand -->
+            <a href="{% url 'dashboard' %}" class="flex items-center gap-3 shrink-0 group">
+                <div
+                    class="w-9 h-9 bg-purple-800 border-2 border-yellow-500/70 rounded-lg flex items-center justify-center font-display font-bold text-yellow-400 text-sm tracking-tighter group-hover:border-yellow-400 transition-colors">
+                    BQ
+                </div>
+                <div class="flex flex-col leading-tight">
+                    <span class="font-display font-bold text-white text-base tracking-tight">Bidii Quality</span>
+                    <span class="text-[0.6rem] font-light text-purple-300 uppercase tracking-[0.14em]">Builders</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <ul class="hidden md:flex items-center gap-1">
+                <li>
+                    <a href="{% url 'dashboard' %}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-purple-300 hover:text-white hover:bg-purple-800/50 transition-all duration-200">
+                        <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'customer-list' %}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-purple-300 hover:text-white hover:bg-purple-800/50 transition-all duration-200">
+                        <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Customers
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'customer-create' %}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold text-white bg-purple-700 border border-purple-600 hover:bg-purple-600 hover:border-purple-500 transition-all duration-200">
+                        <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M12 4v16m8-8H4" />
+                        </svg>
+                        Add Customer
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Hamburger -->
+            <button id="hamburger"
+                class="md:hidden flex flex-col gap-[5px] p-1.5 rounded-md hover:bg-purple-800/40 transition-colors"
+                aria-label="Toggle menu" aria-expanded="false">
+                <span class="bar1 block w-6 h-0.5 bg-purple-300 rounded"></span>
+                <span class="bar2 block w-6 h-0.5 bg-purple-300 rounded"></span>
+                <span class="bar3 block w-6 h-0.5 bg-purple-300 rounded"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobile-menu"
+        class="fixed top-0 right-0 h-full w-72 max-w-[80vw] bg-purple-950 border-l border-purple-800/40 z-50 flex flex-col justify-center px-6 gap-2 md:hidden shadow-2xl">
+        <p class="text-purple-500 text-xs uppercase tracking-widest mb-4 font-medium">Navigation</p>
+
+        <a href="{% url 'dashboard' %}"
+            class="flex items-center gap-3 px-4 py-3.5 rounded-lg border border-purple-800/40 text-purple-300 hover:text-white hover:bg-purple-800/50 hover:border-purple-700 transition-all text-base font-medium">
+            <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Dashboard
+        </a>
+
+        <a href="{% url 'customer-list' %}"
+            class="flex items-center gap-3 px-4 py-3.5 rounded-lg border border-purple-800/40 text-purple-300 hover:text-white hover:bg-purple-800/50 hover:border-purple-700 transition-all text-base font-medium">
+            <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Customers
+        </a>
+
+        <a href="{% url 'customer-create' %}"
+            class="flex items-center justify-center gap-3 px-4 py-3.5 mt-2 rounded-lg bg-purple-700 border border-purple-600 text-white hover:bg-purple-600 transition-all text-base font-semibold">
+            <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+            </svg>
+            Add Customer
+        </a>
+    </div>
+
+    <!-- MAIN -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-5 md:px-8 py-8 md:py-10 relative z-10">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-purple-950 border-t border-purple-800/30 relative z-10">
+        <div
+            class="max-w-6xl mx-auto px-5 md:px-8 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+                <div
+                    class="w-7 h-7 bg-purple-900 border border-yellow-500/40 rounded-md flex items-center justify-center font-display font-bold text-yellow-400 text-xs">
+                    BQ
+                </div>
+                <span class="text-purple-300 text-sm font-medium">Bidii Quality Builders</span>
+            </div>
+            <p class="text-purple-600 text-xs tracking-wide">&copy; 2026 Bidii Quality Builders. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('menu-overlay');
+
+        function toggleMenu(open) {
+            mobileMenu.classList.toggle('open', open);
+            overlay.classList.toggle('open', open);
+            hamburger.classList.toggle('open', open);
+            hamburger.setAttribute('aria-expanded', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
+        overlay.addEventListener('click', () => toggleMenu(false));
+        document.addEventListener('keydown', e => e.key === 'Escape' && toggleMenu(false));
+    </script>
+
+</body>
+
+</html>

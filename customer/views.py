@@ -5,10 +5,11 @@ from django.urls import reverse_lazy
 
 class CustomerListView(ListView):
     model = Customer
-    template_name = '/templates/customers/list.html'
+    template_name = 'customers/list.html'
 
 
 class CustomerCreateView(CreateView):
     model = Customer
-    fields = ['name', 'phone', 'email', 'address']
+    fields = ['name', 'phone_number', 'email', 'address']
+    template_name = 'customers/customer_form.html'
     success_url = reverse_lazy('customer-list')

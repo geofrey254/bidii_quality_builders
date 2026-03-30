@@ -1,0 +1,64 @@
+ body {
+     font-family: 'DM Sans', sans-serif;
+ }
+
+ .font-display {
+     font-family: 'Playfair Display', serif;
+ }
+
+ .bg-grid {
+     background-image:
+         repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(139, 92, 246, 0.07) 59px, rgba(139, 92, 246, 0.07) 60px),
+         repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(139, 92, 246, 0.07) 59px, rgba(139, 92, 246, 0.07) 60px);
+ }
+
+ .nav-accent::after {
+     content: '';
+     position: absolute;
+     bottom: -1px;
+     left: 0;
+     right: 0;
+     height: 1px;
+     background: linear-gradient(90deg, transparent 0%, #c4b5fd 30%, #a78bfa 60%, transparent 100%);
+     opacity: 0.5;
+ }
+
+ #mobile-menu {
+     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+     transform: translateX(100%);
+ }
+
+ #mobile-menu.open {
+     transform: translateX(0);
+ }
+
+ #menu-overlay {
+     transition: opacity 0.3s ease;
+     opacity: 0;
+     pointer-events: none;
+ }
+
+ #menu-overlay.open {
+     opacity: 1;
+     pointer-events: auto;
+ }
+
+ #hamburger.open .bar1 {
+     transform: translateY(7px) rotate(45deg);
+ }
+
+ #hamburger.open .bar2 {
+     opacity: 0;
+     transform: scaleX(0);
+ }
+
+ #hamburger.open .bar3 {
+     transform: translateY(-7px) rotate(-45deg);
+ }
+
+ .bar1,
+ .bar2,
+ .bar3 {
+     transition: all 0.3s ease;
+     transform-origin: center;
+ }

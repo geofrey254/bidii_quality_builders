@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import revenue_chart
+
+from .views import dashboard_home
 
 urlpatterns = [
-    path('', revenue_chart, name='dashboard'),
+    path('', dashboard_home, name='dashboard'),
 ]
