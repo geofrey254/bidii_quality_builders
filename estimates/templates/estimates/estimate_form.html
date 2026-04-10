@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Create Estimate | Bidii Quality Builders{% endblock %}
+
+{% block content %}
+<section class="space-y-8">
+    {% include 'messages.html' %}
+
+    <div>
+        <h1 class="text-xl font-semibold text-gray-900">Create Estimate</h1>
+        <p class="mt-1 text-sm text-gray-500">Add estimate details for a customer project.</p>
+    </div>
+
+    <form method="post" class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-5" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <p class="text-sm text-gray-900">{{ form.non_field_errors.0 }}</p>
+        {% endif %}
+
+        <div class="space-y-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="{{ form.customer.id_for_label }}">{{
+                form.customer.label }}</label>
+            {{ form.customer }}
+            {% if form.customer.errors %}
+            <p class="text-sm text-gray-900">{{ form.customer.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div class="space-y-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="{{ form.description.id_for_label }}">{{
+                form.description.label }}</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+            <p class="text-sm text-gray-900">{{ form.description.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div class="space-y-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="{{ form.visit_date.id_for_label }}">{{
+                form.visit_date.label }}</label>
+            {{ form.visit_date }}
+            {% if form.visit_date.errors %}
+            <p class="text-sm text-gray-900">{{ form.visit_date.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div class="space-y-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="{{ form.estimated_cost.id_for_label }}">{{
+                form.estimated_cost.label }}</label>
+            {{ form.estimated_cost }}
+            {% if form.estimated_cost.errors %}
+            <p class="text-sm text-gray-900">{{ form.estimated_cost.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div class="pt-2 flex flex-wrap gap-3">
+            <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-700 transition-all duration-150 text-sm font-medium">Save
+                Estimate</button>
+            <a href="{% url 'estimate-list' %}"
+                class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-50 transition-all duration-150 text-sm font-medium">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

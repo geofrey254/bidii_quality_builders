@@ -3,56 +3,53 @@
 {% block title %}Dashboard | Bidii Quality Builders{% endblock %}
 
 {% block content %}
-<section style="padding: 1rem; max-width: 1100px; margin: 0 auto; font-family: 'Segoe UI', sans-serif;">
-  <h1 style="margin-bottom: 0.25rem;">Bidii Quality Builders Dashboard</h1>
-  <p style="margin-top: 0; color: #555;">Business visibility for customers, jobs, estimates, invoices, and revenue.</p>
+<section class="space-y-8">
+  <div>
+    <h1 class="text-xl font-semibold text-gray-900">Dashboard</h1>
+    <p class="mt-1 text-sm text-gray-500">Business visibility for customers, jobs, estimates, invoices, and revenue.</p>
+  </div>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.9rem; margin: 1.2rem 0;">
-    <article style="background: #f5f8ff; border: 1px solid #dce6ff; border-radius: 10px; padding: 0.8rem;">
-      <h3 style="margin: 0 0 0.45rem 0; font-size: 1rem;">Customers</h3>
-      <p style="font-size: 1.6rem; margin: 0; font-weight: 700;">{{ total_customers }}</p>
+  <div class="grid gap-6 sm:grid-cols-2">
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-1">
+      <h2 class="text-sm text-gray-500">Customers</h2>
+      <p class="text-lg font-semibold text-gray-900">{{ total_customers }}</p>
     </article>
-
-    <article style="background: #f6fffb; border: 1px solid #d4f3e6; border-radius: 10px; padding: 0.8rem;">
-      <h3 style="margin: 0 0 0.45rem 0; font-size: 1rem;">Estimates</h3>
-      <p style="font-size: 1.6rem; margin: 0; font-weight: 700;">{{ total_estimates }}</p>
-      <small>Accepted: {{ accepted_estimates }}</small>
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-1">
+      <h2 class="text-sm text-gray-500">Estimates</h2>
+      <p class="text-lg font-semibold text-gray-900">{{ total_estimates }}</p>
+      <p class="text-sm text-gray-500">Accepted: {{ accepted_estimates }}</p>
     </article>
-
-    <article style="background: #fffaf3; border: 1px solid #ffe7c0; border-radius: 10px; padding: 0.8rem;">
-      <h3 style="margin: 0 0 0.45rem 0; font-size: 1rem;">Jobs</h3>
-      <p style="font-size: 1.6rem; margin: 0; font-weight: 700;">{{ total_jobs }}</p>
-      <small>Completed: {{ completed_jobs }}</small>
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-1">
+      <h2 class="text-sm text-gray-500">Jobs</h2>
+      <p class="text-lg font-semibold text-gray-900">{{ total_jobs }}</p>
+      <p class="text-sm text-gray-500">Completed: {{ completed_jobs }}</p>
     </article>
-
-    <article style="background: #f9f6ff; border: 1px solid #e8dcff; border-radius: 10px; padding: 0.8rem;">
-      <h3 style="margin: 0 0 0.45rem 0; font-size: 1rem;">Invoices</h3>
-      <p style="font-size: 1.6rem; margin: 0; font-weight: 700;">{{ total_invoices }}</p>
-      <small>Paid: {{ paid_invoices }}</small>
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-1">
+      <h2 class="text-sm text-gray-500">Invoices</h2>
+      <p class="text-lg font-semibold text-gray-900">{{ total_invoices }}</p>
+      <p class="text-sm text-gray-500">Paid: {{ paid_invoices }}</p>
     </article>
   </div>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 1rem 0;">
-    <article style="border: 1px solid #e5e5e5; border-radius: 10px; padding: 0.8rem; background: #fff;">
-      <h2 style="font-size: 1.1rem; margin-top: 0;">Revenue Trend</h2>
-      <img src="data:image/png;base64,{{ revenue_chart }}" alt="Revenue trend chart" style="max-width: 100%; height: auto;">
+  <div class="grid gap-6 md:grid-cols-2">
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-3">
+      <h2 class="text-lg font-semibold text-gray-900">Revenue Trend</h2>
+      <img src="data:image/png;base64,{{ revenue_chart }}" alt="Revenue trend chart" class="w-full h-auto" />
     </article>
-
-    <article style="border: 1px solid #e5e5e5; border-radius: 10px; padding: 0.8rem; background: #fff;">
-      <h2 style="font-size: 1.1rem; margin-top: 0;">Jobs by Status</h2>
-      <img src="data:image/png;base64,{{ job_status_chart }}" alt="Job status chart" style="max-width: 100%; height: auto;">
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-3">
+      <h2 class="text-lg font-semibold text-gray-900">Jobs by Status</h2>
+      <img src="data:image/png;base64,{{ job_status_chart }}" alt="Job status chart" class="w-full h-auto" />
     </article>
   </div>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.9rem; margin-top: 1rem;">
-    <article style="background: #eef8ff; border: 1px solid #cce7ff; border-radius: 10px; padding: 0.8rem;">
-      <h3 style="margin: 0 0 0.45rem 0; font-size: 1rem;">Paid Revenue</h3>
-      <p style="font-size: 1.45rem; margin: 0; font-weight: 700;">KES {{ paid_revenue }}</p>
+  <div class="grid gap-6 sm:grid-cols-2">
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-1">
+      <h2 class="text-sm text-gray-500">Paid Revenue</h2>
+      <p class="text-lg font-semibold text-gray-900">KES {{ paid_revenue }}</p>
     </article>
-
-    <article style="background: #fff1f1; border: 1px solid #ffd6d6; border-radius: 10px; padding: 0.8rem;">
-      <h3 style="margin: 0 0 0.45rem 0; font-size: 1rem;">Outstanding Revenue</h3>
-      <p style="font-size: 1.45rem; margin: 0; font-weight: 700;">KES {{ outstanding_revenue }}</p>
+    <article class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-1">
+      <h2 class="text-sm text-gray-500">Outstanding Revenue</h2>
+      <p class="text-lg font-semibold text-gray-900">KES {{ outstanding_revenue }}</p>
     </article>
   </div>
 </section>

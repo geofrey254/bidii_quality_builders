@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs | Bidii Quality Builders{% endblock %}
+
+{% block content %}
+<section class="space-y-8">
+    {% include 'messages.html' %}
+
+    <div>
+        <h1 class="text-xl font-semibold text-gray-900">Jobs</h1>
+        <p class="mt-1 text-sm text-gray-500">Track project execution and update job status.</p>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+        {% if jobs %}
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="border-b border-gray-200">
+                        <th class="py-3 pr-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">
+                            Customer</th>
+                        <th class="py-3 pr-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Start
+                            Date</th>
+                        <th class="py-3 pr-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Status
+                        </th>
+                        <th class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wide">Update
+                            Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for job in jobs %}
+                    <tr>
+                        <td class="py-3 pr-4 text-gray-900">{{ job.estimate.customer.name }}</td>
+                        <td class="py-3 pr-4 text-gray-700">{{ job.start_date|date:"M d, Y" }}</td>
+                        <td class="py-3 pr-4 text-gray-700">{{ job.get_status_display }}</td>
+                        <td class="py-3">
+                            <form method="post" action="{% url 'job-status-update' job.pk %}"
+                                class="flex flex-wrap items-center gap-2">
+                                {% csrf_token %}
+                                <select name="status"
+                                    class="w-full sm:w-auto border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                    <option value="scheduled" {% if job.status == 'scheduled' %}selected{% endif %}>
+                                        Scheduled</option>
+                                    <option value="ongoing" {% if job.status == 'ongoing' %}selected{% endif %}>Ongoing
+                                    </option>
+                                    <option value="completed" {% if job.status == 'completed' %}selected{% endif %}>
+                                        Completed</option>
+                                </select>
+                                <button type="submit"
+                                    class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-50 transition-all duration-150 text-sm font-medium">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-sm text-gray-500">No jobs yet. Jobs are created when estimates are accepted.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -2,11 +2,17 @@ from jobs.models import Job
 
 
 def accept_estimate(estimate):
+    if estimate.status == 'accepted' and hasattr(estimate, 'job'):
+        return estimate.job
+
     estimate.status = 'accepted'
     estimate.save()
 
-    Job.objects.create(
+    job, _ = Job.objects.get_or_create(
         estimate=estimate,
-        start_date=estimate.visit_date,
-        status='scheduled'
+        defaults={
+            'start_date': estimate.visit_date,
+            'status': 'scheduled',
+        },
     )
+    return job
